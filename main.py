@@ -7,7 +7,7 @@ app = FastAPI()
 # Permitir que el frontend (GitHub Pages) se conecte
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://turtlegamesstudy.github.io"],  # Puedes poner tu dominio de GitHub Pages
+    allow_origins=["https://turtlegamesstudy.github.io"],  # dominio de GitHub Pages
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -43,3 +43,4 @@ def agregar_usuario(nombre: str, email: str):
     conn.commit()
     conn.close()
     return {"mensaje": "Usuario agregado"}
+
