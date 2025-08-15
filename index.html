@@ -7,25 +7,20 @@
     <link rel="stylesheet" href="./loginandsignup.css">
 </head>
 
-
 <body>
     <audio id="sound-hover" src="./Sounds/Hover.mp3" preload="auto"></audio>
-<audio id="sound-error" src="./Sounds/Error.mp3" preload="auto"></audio>
-<audio id="sound-correct" src="./Sounds/Correct.mp3" preload="auto"></audio>
-<!-- Agrega esta etiqueta dentro del <body>, preferiblemente al final -->
-<audio id="sound-bg" src="./Sounds/Background.mp3" preload="auto" autoplay loop></audio>
-
-
+    <audio id="sound-error" src="./Sounds/Error.mp3" preload="auto"></audio>
+    <audio id="sound-correct" src="./Sounds/Correct.mp3" preload="auto"></audio>
+    <audio id="sound-bg" src="./Sounds/Background.mp3" preload="auto" autoplay loop></audio>
 
     <div class="container">
-        
         <!-- Lado Izquierdo -->
         <div class="left-side">
             <img src="./IMG/Logo.png" alt="Logo" class="logo">
             <h2>TGStore</h2>
             <p>
                 Bienvenido a nuestra plataforma. Aqui podras encontrar los juegos desarrollados por Turtle Games,
-                Antes deberas iniciar secion o crear una cuenta.
+                Antes deberas iniciar sesion o crear una cuenta.
             </p>
         </div>
 
@@ -37,110 +32,115 @@
             </div>
 
             <!-- Formulario Login -->
-            <form id="form-login" class="form active" action="Home.html" method="GET">
-              <h1>Inicio De Sesión</h1>
-                <input type="text" placeholder="Usuario" required>
+            <form id="form-login" class="form active">
+                <h1>Inicio De Sesión</h1>
+                <input type="email" placeholder="Correo electrónico" required>
                 <input type="password" placeholder="Contraseña" required>
                 <button type="submit" class="btn">Iniciar Sesión</button>
             </form>
 
             <!-- Formulario Registro -->
-            <form id="form-register" class="form" action="Home.html" method="GET"> <!--/action="Home.html" method="GET"/, Temporal,Conectar al Backend-->
+            <form id="form-register" class="form">
                <h1>Registro</h1>
                 <input type="text" placeholder="Nombre" required>
                 <input type="email" placeholder="Correo electrónico" required>
                 <input type="password" placeholder="Contraseña" required>
                 <input type="password" placeholder="Confirmar contraseña" required>
-                <button type="submit" href class="btn">Registrarse</button>
+                <button type="submit" class="btn">Registrarse</button>
             </form>
         </div>
     </div>
 
     <script>
-       const btnLogin = document.getElementById("btn-login");
-const btnRegister = document.getElementById("btn-register");
-const formLogin = document.getElementById("form-login");
-const formRegister = document.getElementById("form-register");
+        const btnLogin = document.getElementById("btn-login");
+        const btnRegister = document.getElementById("btn-register");
+        const formLogin = document.getElementById("form-login");
+        const formRegister = document.getElementById("form-register");
 
-const soundHover = document.getElementById("sound-hover");
-const soundError = document.getElementById("sound-error");
-const soundCorrect = document.getElementById("sound-correct");
+        const soundHover = document.getElementById("sound-hover");
+        const soundError = document.getElementById("sound-error");
+        const soundCorrect = document.getElementById("sound-correct");
 
-// Cambiar pestañas
-btnLogin.addEventListener("click", () => {
-    btnLogin.classList.add("active");
-    btnRegister.classList.remove("active");
-    formLogin.classList.add("active");
-    formRegister.classList.remove("active");
-});
+        // Cambiar pestañas
+        btnLogin.addEventListener("click", () => {
+            btnLogin.classList.add("active");
+            btnRegister.classList.remove("active");
+            formLogin.classList.add("active");
+            formRegister.classList.remove("active");
+        });
+        btnRegister.addEventListener("click", () => {
+            btnRegister.classList.add("active");
+            btnLogin.classList.remove("active");
+            formRegister.classList.add("active");
+            formLogin.classList.remove("active");
+        });
 
-btnRegister.addEventListener("click", () => {
-    btnRegister.classList.add("active");
-    btnLogin.classList.remove("active");
-    formRegister.classList.add("active");
-    formLogin.classList.remove("active");
-});
+        // Sonido hover para botones
+        document.querySelectorAll("button").forEach(button => {
+            button.addEventListener("mouseenter", () => {
+                soundHover.currentTime = 0;
+                soundHover.play();
+            });
+        });
 
-// Sonido hover para botones
-document.querySelectorAll("button").forEach(button => {
-    button.addEventListener("mouseenter", () => {
-        soundHover.currentTime = 0;
-        soundHover.play();
-    });
-});
+        // Funciones para guardar y leer usuarios en LocalStorage
+        function registrarUsuario(nombre, email, pass) {
+            let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+            usuarios.push({ nombre, email, password: pass });
+            localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        }
 
-// Validar formulario login 
+        function loginUsuario(email, pass) {
+            let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+            return usuarios.find(u => u.email === email && u.password === pass);
+        }
 
+        // Registro
+        formRegister.addEventListener("submit", e => {
+            e.preventDefault();
+            const nombre = formRegister.querySelector('input[type="text"]').value.trim();
+            const email = formRegister.querySelector('input[type="email"]').value.trim();
+            const pass = formRegister.querySelectorAll('input[type="password"]')[0].value.trim();
+            const passConfirm = formRegister.querySelectorAll('input[type="password"]')[1].value.trim();
 
-formRegister.addEventListener("submit", e => {
-    e.preventDefault();
+            if (!nombre || !email || !pass || !passConfirm) {
+                soundError.currentTime = 0;
+                soundError.play();
+                alert("Por favor completa todos los campos.");
+                return;
+            }
 
-    const nombre = formRegister.querySelector('input[type="text"]').value.trim();
-    const email = formRegister.querySelector('input[type="email"]').value.trim();
-    const pass = formRegister.querySelectorAll('input[type="password"]')[0].value.trim();
-    const passConfirm = formRegister.querySelectorAll('input[type="password"]')[1].value.trim();
+            if (pass !== passConfirm) {
+                soundError.currentTime = 0;
+                soundError.play();
+                alert("Las contraseñas no coinciden.");
+                return;
+            }
 
-    if (!nombre || !email || !pass || !passConfirm) {
-        soundError.currentTime = 0;
-        soundError.play();
-        alert("Por favor completa todos los campos.");
-        return;
-    }
+            registrarUsuario(nombre, email, pass);
+            soundCorrect.currentTime = 0;
+            soundCorrect.play();
+            alert("Usuario registrado correctamente");
+            setTimeout(() => { window.location.href = "Home.html"; }, 500);
+        });
 
-    if (pass !== passConfirm) {
-        soundError.currentTime = 0;
-        soundError.play();
-        alert("Las contraseñas no coinciden.");
-        return;
-    }
+        // Login
+        formLogin.addEventListener("submit", e => {
+            e.preventDefault();
+            const email = formLogin.querySelector('input[type="email"]').value.trim();
+            const pass = formLogin.querySelector('input[type="password"]').value.trim();
 
-    // Enviar al backend
-    fetch("https://tu-backend-production.up.railway.app/usuarios", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ nombre: nombre, email: email })
-    })
-    .then(res => res.json())
-    .then(data => {
-        soundCorrect.currentTime = 0;
-        soundCorrect.play();
-        alert(data.mensaje);
-        setTimeout(() => {
-            window.location.href = "Home.html";
-        }, 500);
-    })
-    .catch(err => {
-        soundError.currentTime = 0;
-        soundError.play();
-        alert("Error al conectar con el servidor.");
-        console.error(err);
-    });
-});
-
-
+            if (loginUsuario(email, pass)) {
+                soundCorrect.currentTime = 0;
+                soundCorrect.play();
+                alert("Login correcto");
+                window.location.href = "Home.html";
+            } else {
+                soundError.currentTime = 0;
+                soundError.play();
+                alert("Usuario o contraseña incorrectos");
+            }
+        });
     </script>
 </body>
 </html>
-
