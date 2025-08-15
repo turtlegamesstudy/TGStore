@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - TGStore</title>
+    <link rel="stylesheet" href="GeneralStyle.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="./IMG/LogoBar.png" alt="Logo TGStore">
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="store.html" class="nav-link active">Store</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="support.html" class="nav-link">Support</a></li>
+                <li><a href="community.html" class="nav-link">Community</a></li>
+            </ul>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+
+            <!-- Barra de búsqueda -->
+            <section class="search-bar" style="margin-bottom: 2rem;">
+                <input type="text" placeholder="Buscar juegos..." 
+                       style="width: 80%; padding: 0.8rem; border-radius: 8px; border: none; outline: none; font-size: 1rem;">
+                <button style="padding: 0.8rem 1rem; background-color: rgb(0, 189, 252); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                    Buscar
+                </button>
+            </section>
+
+            <!-- Lista de juegos -->
+            <section class="store-games">
+                <h2>Catálogo de juegos</h2>
+                <div class="game-cards">
+                    <div class="game-card">
+                        <img src="./IMG/game1.png" alt="Juego 1">
+                        <h4>Frost Apocalypse</h4>
+                        <p>Acción intensa en un mundo congelado.</p>
+                        <button style="margin-top: 0.5rem;">Comprar</button>
+                    </div>
+                    <div class="game-card">
+                        <img src="./IMG/game2.png" alt="Juego 2">
+                        <h4>MetaEdu</h4>
+                        <p>Aprende mientras exploras un mundo virtual.</p>
+                        <button style="margin-top: 0.5rem;">Comprar</button>
+                    </div>
+                    <div class="game-card">
+                        <img src="./IMG/game3.png" alt="Juego 3">
+                        <h4>Plasma Pulse</h4>
+                        <p>Batallas épicas en un mundo de neón.</p>
+                        <button style="margin-top: 0.5rem;">Comprar</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>

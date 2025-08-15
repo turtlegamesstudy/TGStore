@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Soporte - TGStore</title>
+    <link rel="stylesheet" href="GeneralStyle.css" />
+    <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Barra lateral -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="./IMG/LogoBar.png" alt="Logo TGStore" />
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="store.html" class="nav-link">Store</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="support.html" class="nav-link active">Support</a></li>
+                <li><a href="community.html" class="nav-link">Community</a></li>
+            </ul>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <section class="support-header">
+                <h1>Soporte Técnico</h1>
+                <p>¿Tienes alguna duda o problema? Contáctanos o revisa nuestras preguntas frecuentes.</p>
+            </section>
+
+            <!-- Formulario de contacto -->
+            <section class="contact-form-section">
+                <h2>Envíanos un mensaje</h2>
+                <form id="contact-form">
+                    <label for="name">Nombre:</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" placeholder="Tu correo" required />
+
+                    <label for="message">Mensaje:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+
+                    <button type="submit" class="btn">Enviar</button>
+                </form>
+                <div id="response-message" style="margin-top:1rem;"></div>
+            </section>
+
+            <!-- Preguntas frecuentes -->
+            <section class="faq-section">
+                <h2>Preguntas frecuentes</h2>
+                <div class="faq-item">
+                    <h3>¿Cómo puedo comprar un juego?</h3>
+                    <p>Solo ve a la sección Store, selecciona el juego y haz clic en "Comprar".</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Qué métodos de pago aceptan?</h3>
+                    <p>Aceptamos tarjetas de crédito, débito y PayPal.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Puedo devolver un juego?</h3>
+                    <p>Las devoluciones son posibles dentro de los primeros 14 días y si no has jugado más de 2 horas.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Inicializar EmailJS
+        emailjs.init("0MPezMf_sMHsKjH5v"); // Cambia aquí con tu User ID de EmailJS
+
+        const contactForm = document.getElementById('contact-form');
+        const responseMessage = document.getElementById('response-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Enviar formulario por EmailJS
+            emailjs.sendForm('service_9cd33m6', 'template_w6r4v3m', this)
+                .then(function() {
+                    responseMessage.textContent = 'Mensaje enviado exitosamente. ¡Gracias por contactarnos!';
+                    responseMessage.style.color = 'green';
+                    contactForm.reset();
+                }, function(error) {
+                    responseMessage.textContent = 'Error al enviar el mensaje. Inténtalo de nuevo.';
+                    responseMessage.style.color = 'red';
+                    console.error('EmailJS Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
