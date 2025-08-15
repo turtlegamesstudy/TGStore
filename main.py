@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import sqlite3
 
 app = FastAPI()
 
-# Permitir que el frontend (GitHub Pages) se conecte
+# Permitir conexión desde tu frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://turtlegamesstudy.github.io"],  # dominio de GitHub Pages
+    allow_origins=["https://turtlegamesstudy.github.io"],  # tu dominio de GitHub Pages
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -29,6 +30,11 @@ with get_db_connection() as conn:
     """)
     conn.commit()
 
+# Modelo de usuario para recibir datos en JSON
+class Usuario(BaseModel):
+    nombre: str
+    email: str
+
 @app.get("/usuarios")
 def obtener_usuarios():
     conn = get_db_connection()
@@ -37,10 +43,9 @@ def obtener_usuarios():
     return [dict(row) for row in usuarios]
 
 @app.post("/usuarios")
-def agregar_usuario(nombre: str, email: str):
+def agregar_usuario(usuario: Usuario):
     conn = get_db_connection()
-    conn.execute("INSERT INTO usuarios (nombre, email) VALUES (?, ?)", (nombre, email))
+    conn.execute("INSERT INTO usuarios (nombre, email) VALUES (?, ?)", (usuario.nombre, usuario.email))
     conn.commit()
     conn.close()
-    return {"mensaje": "Usuario agregado"}
-
+    return {"mensaje": "Usuario agregado correctamente"}
