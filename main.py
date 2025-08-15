@@ -1,11 +1,14 @@
-import os
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import sqlite3
 
-frontend_url = os.getenv("FRONTEND_URL", "https://turtlegamesstudy.github.io/TGStore")
+app = FastAPI()
 
+# Permitir conexión desde tu frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[frontend_url],
+    allow_origins=["https://turtlegamesstudy.github.io"],  # tu dominio de GitHub Pages
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -46,4 +49,3 @@ def agregar_usuario(usuario: Usuario):
     conn.commit()
     conn.close()
     return {"mensaje": "Usuario agregado correctamente"}
-
