@@ -92,67 +92,55 @@ document.querySelectorAll("button").forEach(button => {
 // Validar formulario login 
 
 
-formLogin.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const inputs = formLogin.querySelectorAll("input[required]");
-    let valid = true;
-
-    inputs.forEach(input => {
-        if (!input.value.trim()) valid = false;
-    });
-
-    if (!valid) {
-        soundError.currentTime = 0;
-        soundError.play();
-        alert("Por favor completa todos los campos.");
-    } else {
-        soundCorrect.currentTime = 0;
-        soundCorrect.play();
-
-        // Espera que termine el sonido antes de redirigir 
-        setTimeout(() => {
-            window.location.href = "Home.html";
-        }, 500); 
-    }
-});
-
 formRegister.addEventListener("submit", e => {
     e.preventDefault();
 
-    const inputs = formRegister.querySelectorAll("input[required]");
-    let valid = true;
+    const nombre = formRegister.querySelector('input[type="text"]').value.trim();
+    const email = formRegister.querySelector('input[type="email"]').value.trim();
+    const pass = formRegister.querySelectorAll('input[type="password"]')[0].value.trim();
+    const passConfirm = formRegister.querySelectorAll('input[type="password"]')[1].value.trim();
 
-    inputs.forEach(input => {
-        if (!input.value.trim()) valid = false;
-    });
+    if (!nombre || !email || !pass || !passConfirm) {
+        soundError.currentTime = 0;
+        soundError.play();
+        alert("Por favor completa todos los campos.");
+        return;
+    }
 
-    const pass = formRegister.querySelector('input[type="password"]');
-    const passConfirm = formRegister.querySelectorAll('input[type="password"]')[1];
-
-    if (pass.value !== passConfirm.value) {
-        valid = false;
+    if (pass !== passConfirm) {
         soundError.currentTime = 0;
         soundError.play();
         alert("Las contraseñas no coinciden.");
         return;
     }
 
-    if (!valid) {
-        soundError.currentTime = 0;
-        soundError.play();
-        alert("Por favor completa todos los campos.");
-    } else {
+    // Enviar al backend
+    fetch("https://tu-backend-production.up.railway.app/usuarios", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ nombre: nombre, email: email })
+    })
+    .then(res => res.json())
+    .then(data => {
         soundCorrect.currentTime = 0;
         soundCorrect.play();
-
+        alert(data.mensaje);
         setTimeout(() => {
             window.location.href = "Home.html";
         }, 500);
-    }
+    })
+    .catch(err => {
+        soundError.currentTime = 0;
+        soundError.play();
+        alert("Error al conectar con el servidor.");
+        console.error(err);
+    });
 });
 
 
     </script>
 </body>
 </html>
+
