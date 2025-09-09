@@ -390,11 +390,7 @@ body {
 }
 
 /* ==========================
-   Estilos específicos para Download.html
-========================== */
-
-/* ==========================
-   Estilos específicos para Download.html
+   Estilos específicos para Download.html (estilo Google Play Store)
 ========================== */
 
 /* Contenedor principal de la descarga */
@@ -407,25 +403,24 @@ body {
     overflow-y: auto;
 }
 
-/* Contenedor de imagen + info */
+/* Sección superior: imagen + info */
 .download-section {
     display: flex;
     gap: 2rem;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     margin-bottom: 2rem;
 }
 
-/* Imagen principal del juego */
+/* Contenedor de la imagen principal del juego */
 .game-image-container {
-    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Imagen grande */
+/* Imagen principal */
 .game-image-container img {
     width: 100%;
     max-width: 400px;
@@ -436,27 +431,28 @@ body {
     object-fit: cover;
 }
 
-/* Botones de miniaturas izquierda/derecha */
-.image-buttons {
+/* Contenedor de miniaturas debajo de la imagen principal */
+.miniaturas {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    gap: 0.8rem;
     margin-top: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
 }
 
-.image-buttons button {
-    padding: 0.5rem 1rem;
-    background-color: #00bdfc;
-    color: white;
-    border: none;
+.miniaturas img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
     border-radius: 8px;
+    border: 2px solid rgba(0,255,255,0.5);
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.image-buttons button:hover {
-    background-color: #0096cd;
+.miniaturas img:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0,255,255,0.5);
 }
 
 /* Información de descarga a la derecha */
@@ -465,20 +461,21 @@ body {
     background: rgba(0, 0, 0, 0.6);
     padding: 2rem;
     border-radius: 12px;
-    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 1rem;
 }
 
 .descarga-juego h2 {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
     color: #00ff66;
+    margin-bottom: 0.3rem;
 }
 
 .descarga-juego .precio {
     font-size: 1.2rem;
+    color: #00bdfc;
     margin-bottom: 1rem;
 }
 
@@ -498,10 +495,10 @@ body {
     transform: scale(1.05);
 }
 
-/* Calificación */
-.calificacion {
-    margin-top: 1rem;
-    font-size: 1.1rem;
+/* Calificación y género */
+.calificacion, .genero-juego {
+    font-size: 1rem;
+    color: white;
 }
 
 /* Descripción del juego debajo */
@@ -510,7 +507,8 @@ body {
     padding: 1.5rem;
     border-radius: 12px;
     margin-bottom: 2rem;
-    max-width: 1000px;
+    max-width: 1100px;
+    width: 100%;
     text-align: justify;
 }
 
@@ -541,13 +539,14 @@ body {
     transform: scale(1.05);
 }
 
-/* Comentarios debajo */
+/* Sección de comentarios */
 .comentarios-juego {
     background: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
     border-radius: 12px;
-    max-width: 1000px;
+    max-width: 1100px;
     width: 100%;
+    margin-bottom: 2rem;
 }
 
 .comentarios-juego h3 {
@@ -564,6 +563,16 @@ body {
     border-bottom: none;
 }
 
+/* Scroll suave para miniaturas */
+.miniaturas::-webkit-scrollbar {
+    height: 6px;
+}
+
+.miniaturas::-webkit-scrollbar-thumb {
+    background-color: rgba(0,189,252,0.6);
+    border-radius: 3px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .download-section {
@@ -571,13 +580,18 @@ body {
         align-items: center;
     }
 
-    .descarga-juego, .game-image-container {
+    .descarga-juego, .game-image-container, .descripcion-juego, .comentarios-juego {
         width: 90%;
     }
 }
 
 @media (max-width: 768px) {
-    .image-buttons button {
-        padding: 0.4rem 0.8rem;
+    .miniaturas img {
+        width: 60px;
+        height: 45px;
+    }
+
+    .descarga-juego #descargar {
+        width: 100%;
     }
 }
