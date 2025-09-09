@@ -75,4 +75,21 @@
         </div>
     </div>
 </body>
+
+    <script>
+    // Seleccionamos la imagen principal
+    const imagenPrincipal = document.getElementById('imagen-principal');
+
+    // Seleccionamos todas las miniaturas
+    const miniaturas = document.querySelectorAll('.miniaturas img');
+
+    // Iteramos sobre cada miniatura
+    miniaturas.forEach(miniatura => {
+        miniatura.addEventListener('click', () => {
+            // Cambiamos la imagen principal por la miniatura clickeada
+            imagenPrincipal.src = miniatura.src;
+        });
+    });
+</script>
+
 </html>
