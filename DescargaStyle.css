@@ -388,3 +388,160 @@ body {
     color: rgba(255, 255, 255, 0.9);
     margin: 0.5rem 0 0 0;
 }
+
+/* ==========================
+   Estilos específicos para Download.html
+========================== */
+
+/* Contenedor principal de la descarga */
+.contenedor-principal {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+/* Miniaturas de juego */
+.miniaturas {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.miniaturas img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(0,255,255,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.miniaturas img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0,255,255,0.5);
+}
+
+/* Sección de descarga del juego */
+.descarga-juego {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+.descarga-juego h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #00ff66;
+}
+
+.descarga-juego .precio {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.descarga-juego #descargar {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    background-color: #00bdfc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.descarga-juego #descargar:hover {
+    background-color: #0096cd;
+    transform: scale(1.05);
+}
+
+/* Calificación */
+.calificacion {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Descripción del juego */
+.descripcion-juego {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    text-align: justify;
+}
+
+.descripcion-juego h2 {
+    color: #00ff66;
+    margin-bottom: 0.8rem;
+}
+
+.descripcion-juego p {
+    line-height: 1.5;
+}
+
+/* Botón más información */
+.btn-info {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #00bdfc;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-info:hover {
+    background-color: #0096cd;
+    transform: scale(1.05);
+}
+
+/* Comentarios */
+.comentarios-juego {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 12px;
+    max-width: 600px;
+}
+
+.comentarios-juego h3 {
+    margin-bottom: 1rem;
+    color: #00ff66;
+}
+
+.comentario {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0,255,255,0.3);
+}
+
+.comentario:last-child {
+    border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .miniaturas {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .miniaturas img {
+        width: 90px;
+        height: 60px;
+    }
+
+    .descarga-juego, .descripcion-juego, .comentarios-juego {
+        width: 90%;
+        padding: 1rem;
+    }
+}
