@@ -31,7 +31,7 @@
                 <div class="game-image-container">
                      <img id="imagen-principal" src="IMG/game2.png" alt="MetaEdu">
     <div class="miniaturas">
-        <img src="gameejemplo.jpg" alt="game 1" />
+        <img src="IMG/game2.png" alt="game 1" />
         <img src="gameejemplo.jpg" alt="game 2" />
         <img src="gameejemolo.jpg" alt="game 3" />
     </div>
@@ -76,20 +76,22 @@
     </div>
 </body>
 
-    <script>
-    // Seleccionamos la imagen principal
+   <script>
     const imagenPrincipal = document.getElementById('imagen-principal');
-
-    // Seleccionamos todas las miniaturas
     const miniaturas = document.querySelectorAll('.miniaturas img');
 
-    // Iteramos sobre cada miniatura
+    // Asignar la primera miniatura como imagen principal al cargar
+    if (miniaturas.length > 0) {
+        imagenPrincipal.src = miniaturas[0].src;
+    }
+
+    // Cambiar imagen principal al hacer clic en cualquier miniatura
     miniaturas.forEach(miniatura => {
         miniatura.addEventListener('click', () => {
-            // Cambiamos la imagen principal por la miniatura clickeada
             imagenPrincipal.src = miniatura.src;
         });
     });
 </script>
+
 
 </html>
