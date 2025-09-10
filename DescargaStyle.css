@@ -69,8 +69,11 @@ body {
     flex-direction: column;
     gap: 2rem;
     overflow-y: auto;
-    max-width: 1100px;
+    overflow-x: hidden; /* Evita scroll horizontal */
+    max-width: 100%;    /* Que nunca exceda el ancho de la pantalla */
+    box-sizing: border-box; /* Incluye padding dentro del ancho */
 }
+
 
 /* Layout tipo Steam */
 .juego {
@@ -80,6 +83,8 @@ body {
     border-radius: 12px;
     padding: 2rem;
     flex-wrap: wrap;
+    max-width: 100%; /* Evita que se salga */
+    box-sizing: border-box;
 }
 
 .left-side {
