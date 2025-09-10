@@ -1,5 +1,5 @@
 /* ==========================
-   Estilos esenciales DownloadPage
+   Estilos esenciales DownloadPage tipo Steam
 ========================== */
 
 body { 
@@ -61,23 +61,47 @@ body {
     border-left: 4px solid rgb(0, 255, 102);
 }
 
-/* Contenido principal */
+/* Contenedor principal */
 .contenedor-principal {
     flex: 1;
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 2rem;
     overflow-y: auto;
+    max-width: 1100px;
 }
 
-/* Miniaturas */
+/* Layout tipo Steam */
+.juego {
+    display: flex;
+    gap: 2rem;
+    background: rgba(0,0,0,0.6);
+    border-radius: 12px;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.left-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.left-side img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    border: 2px solid rgba(0,255,255,0.5);
+    object-fit: cover;
+}
+
 .miniaturas {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.5rem;
     margin-top: 1rem;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
 }
 
 .miniaturas img {
@@ -95,14 +119,12 @@ body {
     box-shadow: 0 0 10px rgba(0,255,255,0.5);
 }
 
-/* Descarga del juego */
+/* Info del juego a la derecha */
 .descarga-juego {
     flex: 1;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 2rem;
-    border-radius: 12px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 1rem;
 }
 
@@ -125,6 +147,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    align-self: flex-start;
 }
 
 .descarga-juego button:hover {
@@ -139,11 +162,9 @@ body {
 
 /* Descripción del juego */
 .descripcion-juego {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
     border-radius: 12px;
-    margin-bottom: 2rem;
-    max-width: 1100px;
     width: 100%;
     text-align: justify;
 }
@@ -174,9 +195,7 @@ body {
     background: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
     border-radius: 12px;
-    max-width: 1100px;
     width: 100%;
-    margin-bottom: 2rem;
 }
 
 .comentarios-juego h3 {
@@ -204,8 +223,14 @@ body {
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .contenedor-principal {
-        width: 90%;
+    .juego {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .descarga-juego {
+        width: 100%;
+        align-items: center;
     }
 }
 
