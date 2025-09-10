@@ -1,21 +1,16 @@
+/* ==========================
+   Estilos esenciales DownloadPage
+========================== */
+
 body { 
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 19, 129));
     color: white;
-    height: 100vh;
     display: flex;
-    animation: backgroundMove 30s ease-in-out infinite alternate;
+    height: 100vh;
 }
 
-@keyframes backgroundMove {
-    0% { background-position: center center; }
-    100% { background-position: center top; }
-}
-
-/* ==========================
-   Layout general
-========================== */
 .container {
     display: flex;
     width: 100%;
@@ -39,7 +34,6 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Lista de enlaces */
 .nav-links {
     list-style: none;
     padding: 0;
@@ -68,169 +62,6 @@ body {
 }
 
 /* Contenido principal */
-.main-content {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-    height: 100vh;
-    box-sizing: border-box; 
-}
-
-/* Banner principal */
-.hero-banner {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    box-shadow: 0 0 20px rgba(0,255,200,0.4);
-}
-
-.hero-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    animation: waveEffect 6s ease-in-out infinite alternate;
-    transform-origin: center;
-}
-
-@keyframes waveEffect {
-    0% { transform: scale(1) translateY(0px); filter: brightness(1); }
-    50% { transform: scale(1.01) translateY(-3px); filter: brightness(0.9); }
-    100% { transform: scale(1) translateY(0px); filter: brightness(1); }
-}
-
-.hero-text {
-    position: absolute;
-    bottom: 20px;
-    left: 30px;
-    background: rgba(0,0,0,0.6);
-    padding: 1rem;
-    border-radius: 8px;
-}
-
-/* Noticias y juegos recomendados */
-.news h2, .recommended h2, .blog-posts h2, .faq-section h2, .contact-form-section h2 {
-    border-bottom: 2px solid rgba(0,255,255,0.5);
-    padding-bottom: 0.5rem;
-}
-
-.news-list article, .blog-posts article, .faq-item, .contact-form-section {
-    background: rgba(0,0,0,0.5);
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.news-list article:hover, .blog-posts article:hover, .faq-item:hover, .contact-form-section button:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(0,255,200,0.5);
-}
-
-.game-cards {
-    display: flex;
-    gap: 1rem;
-}
-
-.game-card {
-    flex: 1;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid white;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-    padding-bottom: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.game-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-}
-
-.game-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0,255,200,0.3);
-}
-
-.game-card button {
-    background-color: rgb(0, 189, 252);
-    color: white;
-    border: none;
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s;
-}
-
-.game-card button:hover {
-    background-color: rgb(0, 150, 205);
-}
-
-.game-card h4 {
-    margin: 0.8rem 0 0.4rem;
-    font-size: 1.2rem;
-}
-
-.game-card p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* Barra de búsqueda */
-.search-bar {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-}
-
-.search-bar input[type="text"] {
-    flex: 1;
-    max-width: 600px;
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    transition: box-shadow 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-.search-bar input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.search-bar input[type="text"]:focus {
-    box-shadow: 0 0 8px rgb(0, 189, 252);
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-.search-bar button {
-    padding: 0.8rem 1.2rem;
-    background-color: rgb(0, 189, 252);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-bar button:hover {
-    background-color: rgb(0, 150, 205);
-}
-
-/* ==========================
-   Descarga y sección de juegos
-========================== */
 .contenedor-principal {
     flex: 1;
     padding: 2rem;
@@ -240,31 +71,7 @@ body {
     overflow-y: auto;
 }
 
-.download-section {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    max-width: 1100px;
-    margin-bottom: 2rem;
-}
-
-.game-image-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.game-image-container img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 12px;
-    border: 2px solid rgba(0,255,255,0.5);
-    box-shadow: 0 0 15px rgba(0,255,255,0.3);
-    object-fit: cover;
-}
-
+/* Miniaturas */
 .miniaturas {
     display: flex;
     gap: 0.8rem;
@@ -288,6 +95,7 @@ body {
     box-shadow: 0 0 10px rgba(0,255,255,0.5);
 }
 
+/* Descarga del juego */
 .descarga-juego {
     flex: 1;
     background: rgba(0, 0, 0, 0.6);
@@ -295,7 +103,6 @@ body {
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     gap: 1rem;
 }
 
@@ -325,11 +132,12 @@ body {
     transform: scale(1.05);
 }
 
-.calificacion, .genero-juego {
+.calificacion {
     font-size: 1rem;
     color: white;
 }
 
+/* Descripción del juego */
 .descripcion-juego {
     background: rgba(0, 0, 0, 0.6);
     padding: 1.5rem;
@@ -361,6 +169,7 @@ body {
     transform: scale(1.05);
 }
 
+/* Comentarios */
 .comentarios-juego {
     background: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
@@ -383,7 +192,7 @@ body {
     border-bottom: none;
 }
 
-/* Scroll suave miniaturas */
+/* Scroll miniaturas */
 .miniaturas::-webkit-scrollbar {
     height: 6px;
 }
@@ -395,12 +204,7 @@ body {
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .download-section {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .descarga-juego, .game-image-container, .descripcion-juego, .comentarios-juego {
+    .contenedor-principal {
         width: 90%;
     }
 }
@@ -416,7 +220,7 @@ body {
     }
 }
 
-/* Clase para ocultar secciones */
+/* Ocultar secciones */
 .hidden {
     display: none !important;
 }
