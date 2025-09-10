@@ -94,6 +94,24 @@
         </div>
     </div>
     <script src="downloadpage.js"></script>
+
+    <script>
+    const imagenPrincipal = document.getElementById('imagen-principal');
+    const miniaturas = document.querySelectorAll('.miniaturas img');
+
+    // Asignar la primera miniatura como imagen principal al cargar
+    if (miniaturas.length > 0) {
+        imagenPrincipal.src = miniaturas[0].src;
+    }
+
+    // Cambiar imagen principal al hacer clic en cualquier miniatura
+    miniaturas.forEach(miniatura => {
+        miniatura.addEventListener('click', () => {
+            imagenPrincipal.src = miniatura.src;
+        });
+    });
+</script>
+
 </body>
 </html>
 
