@@ -197,23 +197,27 @@ body {
 }
 
 /* Comentarios */
-.comentarios-juego {
+/* Comentarios dentro de left-side */
+.left-side .comentarios-juego {
     background: rgba(0, 0, 0, 0.5);
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
     border-radius: 12px;
-    width: 100%;
+    width: 100%; /* ocupa todo el ancho del contenedor */
+    box-sizing: border-box; /* incluye padding dentro del ancho */
+    margin-top: 1rem; /* separación de las miniaturas */
 }
 
-.comentarios-juego h3 {
+.left-side .comentarios-juego h3 {
     color: #00ff66;
+    margin-bottom: 0.5rem;
 }
 
-.comentario {
+.left-side .comentario {
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(0,255,255,0.3);
 }
 
-.comentario:last-child {
+.left-side .comentario:last-child {
     border-bottom: none;
 }
 
