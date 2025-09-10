@@ -197,30 +197,42 @@ body {
     transform: scale(1.05);
 }
 
-/* Comentarios */
-/* Comentarios dentro de left-side */
-.left-side .comentarios-juego {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 1rem 1.5rem;
+/* Comentarios estilo Steam */
+.comentarios-juego {
+    background: rgba(0, 0, 50, 0.8); /* Fondo oscuro semi-transparente */
+    padding: 1.5rem;
     border-radius: 12px;
-    width: 100%; /* ocupa todo el ancho del contenedor */
-    box-sizing: border-box; /* incluye padding dentro del ancho */
-    margin-top: 1rem; /* separación de las miniaturas */
+    width: 100%;
+    max-width: 1100px; /* No se salga del contenedor */
+    margin: 2rem auto 0 auto; /* Centrado con separación arriba */
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-.left-side .comentarios-juego h3 {
-    color: #00ff66;
-    margin-bottom: 0.5rem;
+.comentarios-juego h3 {
+    color: #00ff66; /* Título verde brillante */
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(0, 189, 252, 0.4);
+    padding-bottom: 0.3rem;
 }
 
-.left-side .comentario {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(0,255,255,0.3);
+.comentario {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 189, 252, 0.3);
+    font-size: 1rem;
+    color: #ffffff;
 }
 
-.left-side .comentario:last-child {
+.comentario:last-child {
     border-bottom: none;
 }
+
+/* Resaltar usuario */
+.comentario strong {
+    color: #00bdfc;
+}
+
 
 /* Scroll miniaturas */
 .miniaturas::-webkit-scrollbar {
