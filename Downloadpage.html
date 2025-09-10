@@ -25,7 +25,7 @@
             <!-- MetaEdu -->
             <div id="metaedu" class="juego">
                <div class="left-side">
-    <img id="imagen-principal" src="./IMG/game2.png" alt="MetaEdu" class="logos">
+    <img id="imagen-principal-metaedu" src="./IMG/game2.png" alt="MetaEdu" class="logos">
 </div>
 
                 <div class="contenedor-principal">
@@ -61,7 +61,7 @@
             <!-- Plasma Pulse -->
             <div id="plasma" class="juego hidden">
                <div class="left-side">
-    <img id="imagen-principal" src="./IMG/game2.png" alt="MetaEdu" class="logos">
+    <img id="imagen-principal-plasma" src="./IMG/game2.png" alt="Plasma Pulse" class="logos">
 </div>
 
                 <div class="contenedor-principal">
@@ -98,20 +98,23 @@
     <script src="downloadpage.js"></script>
 
     <script>
-    const imagenPrincipal = document.getElementById('imagen-principal');
-    const miniaturas = document.querySelectorAll('.miniaturas img');
+   document.querySelectorAll('.juego').forEach(juego => {
+    const imagenPrincipal = juego.querySelector('.left-side img');
+    const miniaturas = juego.querySelectorAll('.miniaturas img');
 
-    // Asignar la primera miniatura como imagen principal al cargar
+    // La primera miniatura como predeterminada
     if (miniaturas.length > 0) {
         imagenPrincipal.src = miniaturas[0].src;
     }
 
-    // Cambiar imagen principal al hacer clic en cualquier miniatura
+    // Cambiar imagen al hacer clic
     miniaturas.forEach(miniatura => {
         miniatura.addEventListener('click', () => {
             imagenPrincipal.src = miniatura.src;
         });
     });
+});
+
 </script>
 
 </body>
