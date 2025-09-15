@@ -34,34 +34,55 @@
             <!-- Formulario Login -->
             <form id="form-login" class="form active">
                 <h1>Inicio De Sesión</h1>
-                <input type="email" placeholder="Correo electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
+                <input type="email" id="login-email" placeholder="Correo electrónico" required>
+                <input type="password" id="login-pass" placeholder="Contraseña" required>
                 <button type="submit" class="btn">Iniciar Sesión</button>
             </form>
 
             <!-- Formulario Registro -->
             <form id="form-register" class="form">
                <h1>Registro</h1>
-                <input type="text" placeholder="Nombre" required>
-                <input type="email" placeholder="Correo electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
-                <input type="password" placeholder="Confirmar contraseña" required>
+                <input type="text" id="register-nombre" placeholder="Nombre" required>
+                <input type="email" id="register-email" placeholder="Correo electrónico" required>
+                <input type="password" id="register-pass" placeholder="Contraseña" required>
+                <input type="password" id="register-pass-confirm" placeholder="Confirmar contraseña" required>
                 <button type="submit" class="btn">Registrarse</button>
             </form>
         </div>
     </div>
 
-    <script>
+    <!-- Firebase -->
+    <script type="module">
+        // Importar SDKs de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
+        // Configuración Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAH3QCPFQENai2BP8OBEl9pAQkOj1xPe2k",
+            authDomain: "tgdatabase-73e2a.firebaseapp.com",
+            projectId: "tgdatabase-73e2a",
+            storageBucket: "tgdatabase-73e2a.firebasestorage.app",
+            messagingSenderId: "234549403143",
+            appId: "1:234549403143:web:d8820aebfedaeecc4e54a2",
+            measurementId: "G-4D3GXXT58G"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Sonidos
+        const soundHover = document.getElementById("sound-hover");
+        const soundError = document.getElementById("sound-error");
+        const soundCorrect = document.getElementById("sound-correct");
+
+        // Tabs
         const btnLogin = document.getElementById("btn-login");
         const btnRegister = document.getElementById("btn-register");
         const formLogin = document.getElementById("form-login");
         const formRegister = document.getElementById("form-register");
 
-        const soundHover = document.getElementById("sound-hover");
-        const soundError = document.getElementById("sound-error");
-        const soundCorrect = document.getElementById("sound-correct");
-
-        // Cambiar pestañas
         btnLogin.addEventListener("click", () => {
             btnLogin.classList.add("active");
             btnRegister.classList.remove("active");
@@ -75,7 +96,7 @@
             formLogin.classList.remove("active");
         });
 
-        // Sonido hover para botones
+        // Hover sonidos
         document.querySelectorAll("button").forEach(button => {
             button.addEventListener("mouseenter", () => {
                 soundHover.currentTime = 0;
@@ -83,60 +104,46 @@
             });
         });
 
-        // Funciones para guardar y leer usuarios en LocalStorage
-        function registrarUsuario(nombre, email, pass) {
-            let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-            usuarios.push({ nombre, email, password: pass });
-            localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        }
-
-        function loginUsuario(email, pass) {
-            let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
-            return usuarios.find(u => u.email === email && u.password === pass);
-        }
-
-        // Registro
-        formRegister.addEventListener("submit", e => {
+        // Registro con Firebase
+        formRegister.addEventListener("submit", async e => {
             e.preventDefault();
-            const nombre = formRegister.querySelector('input[type="text"]').value.trim();
-            const email = formRegister.querySelector('input[type="email"]').value.trim();
-            const pass = formRegister.querySelectorAll('input[type="password"]')[0].value.trim();
-            const passConfirm = formRegister.querySelectorAll('input[type="password"]')[1].value.trim();
+            const nombre = document.getElementById("register-nombre").value.trim();
+            const email = document.getElementById("register-email").value.trim();
+            const pass = document.getElementById("register-pass").value.trim();
+            const passConfirm = document.getElementById("register-pass-confirm").value.trim();
 
             if (!nombre || !email || !pass || !passConfirm) {
-                soundError.currentTime = 0;
                 soundError.play();
-                alert("Por favor completa todos los campos.");
-                return;
+                return alert("Por favor completa todos los campos.");
             }
-
             if (pass !== passConfirm) {
-                soundError.currentTime = 0;
                 soundError.play();
-                alert("Las contraseñas no coinciden.");
-                return;
+                return alert("Las contraseñas no coinciden.");
             }
 
-            registrarUsuario(nombre, email, pass);
-            soundCorrect.currentTime = 0;
-            soundCorrect.play();
-            alert("Usuario registrado correctamente");
-            setTimeout(() => { window.location.href = "Home.html"; }, 500);
+            try {
+                await createUserWithEmailAndPassword(auth, email, pass);
+                soundCorrect.play();
+                alert("Usuario registrado correctamente");
+                setTimeout(() => window.location.href = "Home.html", 500);
+            } catch (error) {
+                soundError.play();
+                alert("Error al registrar: " + error.message);
+            }
         });
 
-        // Login
-        formLogin.addEventListener("submit", e => {
+        // Login con Firebase
+        formLogin.addEventListener("submit", async e => {
             e.preventDefault();
-            const email = formLogin.querySelector('input[type="email"]').value.trim();
-            const pass = formLogin.querySelector('input[type="password"]').value.trim();
+            const email = document.getElementById("login-email").value.trim();
+            const pass = document.getElementById("login-pass").value.trim();
 
-            if (loginUsuario(email, pass)) {
-                soundCorrect.currentTime = 0;
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
                 soundCorrect.play();
                 alert("Login correcto");
                 window.location.href = "Home.html";
-            } else {
-                soundError.currentTime = 0;
+            } catch (error) {
                 soundError.play();
                 alert("Usuario o contraseña incorrectos");
             }
