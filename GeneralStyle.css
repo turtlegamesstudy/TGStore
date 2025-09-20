@@ -99,24 +99,6 @@ body {
     animation: neon-pulse 1.5s infinite;
 }
 
-.sidebar-footer {
-    margin-top: auto;
-    padding: 1rem;
-    display: flex;
-    gap: 1rem;
-}
-
-.sidebar-footer a {
-    color: rgba(0,255,255,0.7);
-    font-size: 1.2rem;
-    transition: 0.3s;
-}
-
-.sidebar-footer a:hover {
-    color: #00ffcc;
-    text-shadow: 0 0 6px #00ffcc;
-}
-
 
 /* Contenido principal */
 .main-content {
@@ -517,4 +499,119 @@ h2{
     margin: 0.5rem 0 0 0;
 }
 
+
+/* Contenedor de cards */
+.community-cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* Card individual */
+.community-card {
+    flex: 1 1 250px;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(0, 255, 102, 0.4);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.community-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.7);
+}
+
+/* Imagen o ícono dentro de la card */
+.community-card img,
+.community-card i {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 2px solid rgba(0, 255, 102, 0.4);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+    object-fit: cover;
+    font-size: 3rem; /* Para íconos */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Título dentro de la card */
+.community-card h4 {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    color: rgb(0, 255, 102);
+}
+
+/* Descripción dentro de la card */
+.community-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Botón dentro de la card */
+.community-card .community-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background-color: rgb(0, 189, 252);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.community-card .community-button:hover {
+    background-color: rgb(0, 150, 205);
+    transform: translateY(-2px);
+}
+
+/* Contenedor de redes sociales */
+.community-socials {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Enlaces de redes sociales */
+.community-socials a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(0, 189, 252, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.community-socials a i {
+    font-size: 1.2rem;
+    color: rgb(0, 189, 252);
+}
+
+.community-socials a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(0, 189, 252, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Imagen de logos en cards de comunidad */
+.community-card .community-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
 
