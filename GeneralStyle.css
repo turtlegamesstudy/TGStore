@@ -25,20 +25,35 @@ body {
     width: 220px;
     flex-shrink: 0; 
     background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,19,129,0.8));
+    background-size: 200% 200%;
+    animation: sidebar-gradient 12s ease infinite;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
     border-right: 2px solid rgba(0,255,255,0.4);
+    backdrop-filter: blur(8px);
+
+
+    /* Sombras para profundidad */
+    box-shadow: inset -5px 0 15px rgba(0, 255, 255, 0.1),
+                2px 0 10px rgba(0, 0, 0, 0.6);
+                box-shadow: 0 0 20px rgba(0,255,255,0.15);
+
 }
 
-/* Contenido principal */
-.main-content {
-    flex: 1;
-    padding: 2rem;
-    overflow-y: auto;
-    height: 100vh;
-    box-sizing: border-box; 
+@keyframes sidebar-gradient {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+.logo-container {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,255,255,0.2);
+    width: 80%;
+    text-align: center;
 }
 
 .logo-container img {
@@ -61,18 +76,57 @@ body {
     text-decoration: none;
     font-weight: bold;
     border-left: 4px solid transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.05); /* Separadores */
     transition: all 0.3s ease;
 }
 
 .nav-link:hover {
     background-color: rgba(0, 189, 252, 0.2);
     border-left: 4px solid rgb(0, 189, 252);
+    text-shadow: 0 0 6px rgba(0,189,252,0.8); /* Glow */
+    transform: translateX(5px); /* Movimiento */
+}
+
+/* Animación neón del enlace activo */
+@keyframes neon-pulse {
+    0%, 100% { border-left-color: rgb(0,255,102); }
+    50% { border-left-color: rgba(0,255,102,0.3); }
 }
 
 .nav-link.active {
-    background-color: rgba(0, 255, 102, 0.3);
+    background-color: rgba(0, 255, 102, 0.2);
     border-left: 4px solid rgb(0, 255, 102);
+    animation: neon-pulse 1.5s infinite;
 }
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.sidebar-footer a {
+    color: rgba(0,255,255,0.7);
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.sidebar-footer a:hover {
+    color: #00ffcc;
+    text-shadow: 0 0 6px #00ffcc;
+}
+
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    height: 100vh;
+    box-sizing: border-box; 
+}
+
 
 /* Contenido principal */
 .main-content {
@@ -182,7 +236,7 @@ body {
     background: rgba(0,0,0,0.5);
     padding: 1rem;
     margin-bottom: 1rem;
-    border-radius: 8px;
+    border-radius: 1rem;
     transition: transform 0.3s ease;
     box-shadow: 0 0 15px rgba(0,255,200,0.5);
 }
@@ -202,7 +256,7 @@ body {
     flex: 1;
     background: rgba(0,0,0,0.5);
     border: 1px solid white;
-    border-radius: 8px;
+    border-radius: 1rem;
     overflow: hidden;
     text-align: center;
     padding-bottom: 1rem;
