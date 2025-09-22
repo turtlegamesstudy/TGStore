@@ -34,7 +34,7 @@
             <!-- Formulario de contacto -->
             <section class="contact-form-section">
                 <h2>Envíanos un mensaje</h2>
-                <form id="contact-form">
+                <form id="contact-form" action="https://formsubmit.co/aracellynoelia30@gmail.com" method="POST">
                     <label for="name">Nombre:</label>
                     <input type="text" id="name" name="name" placeholder="Tu nombre" required />
 
@@ -45,6 +45,8 @@
                     <textarea id="message" name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
 
                     <button type="submit" class="btn">Enviar</button>
+                    <input type="hidden" name="_next" value="">
+                    <input type="hidden" name="_captcha" value="false">
                 </form>
                 <div id="response-message" style="margin-top:1rem;"></div>
             </section>
@@ -69,27 +71,83 @@
     </div>
 
     <script>
-        // Inicializar EmailJS
-        emailjs.init("0MPezMf_sMHsKjH5v"); // Cambia aquí con tu User ID de EmailJS
+        // Inicializar EmailJS (si está disponible)
+        if (typeof emailjs !== 'undefined' && emailjs.init) {
+            try {
+                emailjs.init("0MPezMf_sMHsKjH5v"); // Cambia aquí con tu User ID de EmailJS
+            } catch (e) {
+                console.warn('No se pudo inicializar EmailJS:', e);
+            }
+        } else {
+            console.warn('EmailJS no está cargado. El envío por EmailJS no funcionará.');
+        }
 
         const contactForm = document.getElementById('contact-form');
         const responseMessage = document.getElementById('response-message');
+        // Asegurar que el campo _next apunte a la URL actual (útil para despliegue en la nube)
+        function setNextToCurrentLocation() {
+            if (!contactForm) return;
+            const nextInput = contactForm.querySelector('input[name="_next"]');
+            try {
+                if (nextInput) nextInput.value = window.location.href;
+            } catch (e) { /* noop */ }
+        }
 
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            // Enviar formulario por EmailJS
-            emailjs.sendForm('service_9cd33m6', 'template_w6r4v3m', this)
-                .then(function() {
-                    responseMessage.textContent = 'Mensaje enviado exitosamente. ¡Gracias por contactarnos!';
-                    responseMessage.style.color = 'green';
-                    contactForm.reset();
-                }, function(error) {
-                    responseMessage.textContent = 'Error al enviar el mensaje. Inténtalo de nuevo.';
-                    responseMessage.style.color = 'red';
-                    console.error('EmailJS Error:', error);
-                });
-        });
+                // Actualizar destino de redirección al entorno actual (local o nube)
+                setNextToCurrentLocation();
+
+                if (typeof emailjs !== 'undefined' && emailjs.sendForm) {
+                    // Enviar formulario por EmailJS
+                    emailjs.sendForm('service_9cd33m6', 'template_w6r4v3m', this)
+                        .then(function() {
+                            if (responseMessage) {
+                                responseMessage.textContent = 'Mensaje enviado exitosamente. ¡Gracias por contactarnos!';
+                                responseMessage.style.color = 'green';
+                            }
+                            contactForm.reset();
+                        }, function(error) {
+                            if (responseMessage) {
+                                responseMessage.textContent = 'Error al enviar el mensaje. Inténtalo de nuevo.';
+                                responseMessage.style.color = 'red';
+                            }
+                            console.error('EmailJS Error:', error);
+                        });
+                } else {
+                    // Fallback: usar envío tradicional (submit) o recargar la página si no funciona
+                    // No mostrar mensaje en fallback para evitar confusión del usuario
+                    // (mantener el área de mensajes vacía)
+                    if (responseMessage) {
+                        responseMessage.textContent = '';
+                    }
+
+                    // Intentar envío tradicional (submit) para que el navegador procese el action.
+                    try {
+                        contactForm.removeEventListener('submit', arguments.callee);
+                        contactForm.submit();
+                        // Si el submit no navega (por alguna razón), dejamos que la página se recargue
+                        setTimeout(function() {
+                            // Si aún estamos en la misma página después de un corto tiempo, recargamos para limpiar el formulario
+                            if (window.location.href.indexOf('#') === -1) {
+                                try { window.location.reload(); } catch(e) { /* noop */ }
+                            }
+                        }, 1500);
+                    } catch (err) {
+                        console.error('Error al enviar tradicionalmente:', err);
+                        if (responseMessage) {
+                            responseMessage.textContent = 'No fue posible enviar el formulario. Se recargará la página.';
+                            responseMessage.style.color = 'red';
+                        }
+                        setTimeout(function() { try { window.location.reload(); } catch(e) { /* noop */ } }, 1000);
+                    }
+                }
+            });
+        } else {
+            console.warn('Formulario de contacto no encontrado (id="contact-form").');
+        }
     </script>
 </body>
 </html>
