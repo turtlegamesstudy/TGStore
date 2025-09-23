@@ -1,8 +1,8 @@
 /* ==========================
-   Estilos esenciales DownloadPage tipo Steam
+    Estilos esenciales DownloadPage tipo Steam
 ========================== */
 
-body { 
+body { 
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(0deg, rgb(0, 0, 0), rgb(0, 19, 129));
@@ -20,13 +20,31 @@ body {
 /* Barra lateral */
 .sidebar {
     width: 220px;
-    flex-shrink: 0; 
+    flex-shrink: 0; 
     background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,19,129,0.8));
+    background-size: 200% 200%;
+    animation: sidebar-gradient 12s ease infinite;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
     border-right: 2px solid rgba(0,255,255,0.4);
+    backdrop-filter: blur(8px);
+    box-shadow: inset -5px 0 15px rgba(0, 255, 255, 0.1), 2px 0 10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0,255,255,0.15);
+}
+
+@keyframes sidebar-gradient {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+.logo-container {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,255,255,0.2);
+    width: 80%;
+    text-align: center;
 }
 
 .logo-container img {
@@ -34,6 +52,7 @@ body {
     margin-bottom: 2rem;
 }
 
+/* Lista de enlaces */
 .nav-links {
     list-style: none;
     padding: 0;
@@ -48,17 +67,47 @@ body {
     text-decoration: none;
     font-weight: bold;
     border-left: 4px solid transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     transition: all 0.3s ease;
 }
 
 .nav-link:hover {
     background-color: rgba(0, 189, 252, 0.2);
     border-left: 4px solid rgb(0, 189, 252);
+    text-shadow: 0 0 6px rgba(0,189,252,0.8);
+    transform: translateX(5px);
+}
+
+/* Animación neón del enlace activo */
+@keyframes neon-pulse {
+    0%, 100% { border-left-color: rgb(0,255,102); }
+    50% { border-left-color: rgba(0,255,102,0.3); }
 }
 
 .nav-link.active {
-    background-color: rgba(0, 255, 102, 0.3);
+    background-color: rgba(0, 255, 102, 0.2);
     border-left: 4px solid rgb(0, 255, 102);
+    animation: neon-pulse 1.5s infinite;
+}
+
+@keyframes animate-background {
+    0% { background-position: 0 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: transparent;
+    background-image: url('https://images.unsplash.com/photo-1732535725600-f805d8b33c9c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: 200%;
+    background-position: 0 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate-background 5s infinite alternate linear;
+    border-bottom: 2px solid rgba(0,255,255,0.5);
+    padding-bottom: 0.5rem;
 }
 
 /* Contenedor principal */
@@ -69,11 +118,10 @@ body {
     flex-direction: column;
     gap: 2rem;
     overflow-y: auto;
-    overflow-x: hidden; /* Evita scroll horizontal */
-    max-width: 100%;    /* Que nunca exceda el ancho de la pantalla */
-    box-sizing: border-box; /* Incluye padding dentro del ancho */
+    overflow-x: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
 }
-
 
 /* Layout tipo Steam */
 .juego {
@@ -83,7 +131,7 @@ body {
     border-radius: 12px;
     padding: 2rem;
     flex-wrap: wrap;
-    max-width: 100%; /* Evita que se salga */
+    max-width: 100%;
     box-sizing: border-box;
 }
 
@@ -94,7 +142,8 @@ body {
     align-items: center;
 }
 
-.left-side img {
+/* Estilo para la imagen principal y el logo */
+.left-side img.logos {
     background-color: black;
     max-width: 100%;
     height: 350px;
@@ -102,7 +151,6 @@ body {
     border: 2px solid rgba(0,255,255,0.5);
     object-fit: cover;
 }
-
 
 .miniaturas {
     display: flex;
@@ -138,11 +186,13 @@ body {
 .descarga-juego h2 {
     font-size: 2rem;
     color: #00ff66;
+    margin: 0; /* Asegura que no haya margen extra */
 }
 
 .descarga-juego .precio {
     font-size: 1.2rem;
     color: #00bdfc;
+    margin: 0; /* Asegura que no haya margen extra */
 }
 
 .descarga-juego button {
@@ -200,18 +250,18 @@ body {
 /* Comentarios estilo Steam */
 .comentarios-juego {
     background: rgba(0, 0, 50, 0.95);
-   margin-top: 10px;
+    margin-top: 10px;
     padding: 1rem;
     border-radius: 12px;
     width: 100%;
-    max-width: 320px; /* Ajusta según el ancho de left-side */
+    max-width: 500px;
     overflow-y: auto;
-    max-height: 300px; /* Para scroll si hay muchos comentarios */
+    max-height: 300px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .comentarios-juego h3 {
-    color: #00ff66; /* Título verde brillante */
+    color: #00ff66;
     font-size: 1.5rem;
     margin-bottom: 1rem;
     border-bottom: 2px solid rgba(0, 189, 252, 0.4);
@@ -229,11 +279,9 @@ body {
     border-bottom: none;
 }
 
-/* Resaltar usuario */
 .comentario strong {
     color: #00bdfc;
 }
-
 
 /* Scroll miniaturas */
 .miniaturas::-webkit-scrollbar {
