@@ -454,7 +454,7 @@ h2{
 /* Imágenes dentro de los artículos */
 .blog-posts article img {
     max-width: 100%;
-    height: auto;
+    height: 90%;
     border-radius: 8px;
     margin-bottom: 1rem;
     border: 2px solid rgba(0, 255, 102, 0.4);
@@ -676,3 +676,4 @@ h2{
     object-fit: contain;
     margin-bottom: 1rem;
 }
+
